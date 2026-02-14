@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title> Valentines Day 💜</title>
+
+<style>
+/* ========= ARKA PLAN VIDEO ========= */
+.video-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* mor filtre */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(40, 10, 70, 0.75);
+    z-index: -1;
+    transition: background 3s ease;
+}
+
+.overlay.dark {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* ========= GENEL ========= */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* ========= SLIDE (FADE SİSTEMİ) ========= */
+.slide {
+    position: absolute;
+    inset: 0;
+    padding: 40px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2.5s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ========= METİN ========= */
+h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(255,143,216,0.4);
+}
+
+p {
+    font-size: 22px;
+}
+
+.highlight { color: #ff8fd8; }
+.sub { color: #c7a6ff; }
+
+/* ========= MEDYA ========= */
+img {
+    width: 320px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+/* ========= FINAL ANİMASYON ========= */
+@keyframes cinematicIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+        letter-spacing: 2px;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 0;
+    }
+}
+
+.final-line {
+    font-size: 42px;
+    color: #ff8fd8;
+    opacity: 0;
+    animation: cinematicIn 3s ease forwards;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎥 ARKA PLAN VIDEO -->
+<video class="video-bg" autoplay muted loop playsinline>
+    <source src="background13.mp4" type="video/mp4">
+</video>
+<div class="overlay" id="overlay"></div>
+
+<!-- 🎧 TEK VE KESİNTİSİZ MÜZİK -->
+<audio id="bgMusic" autoplay loop muted>
+    <source src="backgroundmusic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ========= SLIDES ========= -->
+
+<div class="slide active">
+    <h1>2026 Özeti(yılın başındayız biliyorum)</h1>
+    <p class="sub">Ama Spotify gibisinden değil :)))  💜</p>
+</div>
+
+<div class="slide">
+    <h1>17 yıl 8 aylık ömrümde yaptığım tek doğru şey.</h1>
+    <p>öne çıkanlardaki kıvırcık saçlı kıza istek atmak</p>
+</div>
+
+<div class="slide">
+    <h1>Bana Regular Show CJ'i andırıyosun</h1>
+    <img src="foto2.jpg" width="100">
+</div>
+
+<div class="slide">
+    <h1>YILIN EN GÜZEL KIZI🔥💜</h1>
+    <img src="foto1.jpg" width="100">
+</div>
+
+<div class="slide">
+    <h1>En çok güldüğüm şakan</h1>
+    <p>Yalvarman hoşuma gitti..Yapmaya devam et</p>
+</div>
+
+
+<div class="slide">
+    <h1>Lütfn bu hafta olmasada önümüzdeki hafta buluşalım😢
+    <p>Mesela önümüzdeki hafta pazar🤓
+    <img src="foto3.jpg">
+</div>
+
+<!-- 🖤 FINAL -->
+<div class="slide" id="finalSlide">
+    <div class="final-line">
+        Yeni yıla daha iyi başlanılamazdı(sayende)<br>Sevgililer günümüz kutlu olsun
+        <br>
+        <strong>Ekinler baş vermeden kör buzağı topallamaz.. 
+                                            -Recep İvediğin Ninesi- 
+        </strong>
+    </div>
+</div>
+
+<!-- ========= JS ========= -->
+<script>
+const slides = document.querySelectorAll(".slide");
+const overlay = document.getElementById("overlay");
+const bgMusic = document.getElementById("bgMusic");
+
+let index = 0;
+
+/* autoplay kilidi */
+document.addEventListener("click", () => {
+    bgMusic.muted = false;
+    bgMusic.play();
+}, { once: true });
+
+let interval = setInterval(nextSlide, 8000);
+
+function nextSlide() {
+    slides[index].classList.remove("active");
+    index++;
+
+    if (index === slides.length - 1) {
+        clearInterval(interval);
+        overlay.classList.add("dark");
+    }
+
+    slides[index].classList.add("active");
+}
+</script>
+
+</body>
+</html>
